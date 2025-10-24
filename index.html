@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bethesda: A Gaming Industry Pioneer - Presentation</title>
+    <style>
+        :root {
+          /* Primitive Color Tokens */
+          --color-white: rgba(255, 255, 255, 1);
+          --color-black: rgba(0, 0, 0, 1);
+          --color-cream-50: rgba(252, 252, 249, 1);
+          --color-cream-100: rgba(255, 255, 253, 1);
+          --color-gray-200: rgba(245, 245, 245, 1);
+          --color-gray-300: rgba(167, 169, 169, 1);
+          --color-gray-400: rgba(119, 124, 124, 1);
+          --color-slate-500: rgba(98, 108, 113, 1);
+          --color-brown-600: rgba(94, 82, 64, 1);
+          --color-charcoal-700: rgba(31, 33, 33, 1);
+          --color-charcoal-800: rgba(38, 40, 40, 1);
+          --color-slate-900: rgba(19, 52, 59, 1);
+          --color-teal-300: rgba(50, 184, 198, 1);
+          --color-teal-400: rgba(45, 166, 178, 1);
+          --color-teal-500: rgba(33, 128, 141, 1);
+          --color-teal-600: rgba(29, 116, 128, 1);
+          --color-teal-700: rgba(26, 104, 115, 1);
+          --color-teal-800: rgba(41, 150, 161, 1);
+          --color-red-400: rgba(255, 84, 89, 1);
+          --color-red-500: rgba(192, 21, 47, 1);
+          --color-orange-400: rgba(230, 129, 97, 1);
+          --color-orange-500: rgba(168, 75, 47, 1);
+        
+          /* Bethesda Brand Colors */
+          --bethesda-blue: #1a2e4a;
+          --bethesda-dark-blue: #0f1a2a;
+          --bethesda-gold: #d4af37;
+          --bethesda-silver: #c0c5ce;
+          --bethesda-gray: #2a3440;
+        
+          /* Semantic Color Tokens */
+          --color-background: var(--bethesda-dark-blue);
+          --color-surface: var(--bethesda-blue);
+          --color-text: var(--color-white);
+          --color-text-secondary: var(--bethesda-silver);
+          --color-primary: var(--bethesda-gold);
+          --color-accent: var(--bethesda-silver);
+        
+          /* Typography */
+          --font-family-base: "Arial", "Helvetica", sans-serif;
+          --font-size-xs: 14px;
+          --font-size-sm: 16px;
+          --font-size-base: 18px;
+          --font-size-md: 20px;
+          --font-size-lg: 24px;
+          --font-size-xl: 28px;
+          --font-size-2xl: 32px;
+          --font-size-3xl: 36px;
+          --font-size-4xl: 44px;
+          --font-weight-normal: 400;
+          --font-weight-medium: 500;
+          --font-weight-semibold: 550;
+          --font-weight-bold: 600;
+          --line-height-tight: 1.2;
+          --line-height-normal: 1.4;
+        
+          /* Spacing */
+          --space-8: 8px;
+          --space-16: 16px;
+          --space-24: 24px;
+          --space-32: 32px;
+          --space-48: 48px;
+          --space-64: 64px;
+        
+          /* Border Radius */
+          --radius-base: 8px;
+          --radius-lg: 12px;
+        
+          /* Animation */
+          --duration-normal: 300ms;
+          --ease-standard: ease-in-out;
+        }
+        
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        
+        body {
+          font-family: var(--font-family-base);
+          background: var(--color-background);
+          color: var(--color-text);
+          overflow: hidden;
+        }
+        
+        .presentation-container {
+          width: 100vw;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .presentation-header {
+          background: var(--bethesda-gray);
+          padding: var(--space-16) var(--space-32);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 2px solid var(--color-primary);
+        }
+        
+        .presentation-title {
+          font-size: var(--font-size-lg);
+          font-weight: var(--font-weight-bold);
+          color: var(--color-primary);
+        }
+        
+        .slide-counter {
+          font-size: var(--font-size-base);
+          color: var(--color-text-secondary);
+        }
+        
+        .slide-container {
+          flex: 1;
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .slide {
+          width: 100%;
+          height: 100%;
+          padding: var(--space-64);
+          display: none;
+          flex-direction: column;
+          justify-content: center;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: linear-gradient(135deg, var(--color-background) 0%, var(--bethesda-blue) 100%);
+        }
+        
+        .slide.active {
+          display: flex;
+        }
+        
+        .slide-title {
+          font-size: var(--font-size-4xl);
+          font-weight: var(--font-weight-bold);
+          color: var(--color-primary);
+          text-align: center;
+          margin-bottom: var(--space-48);
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .slide-subtitle {
+          font-size: var(--font-size-2xl);
+          color: var(--color-text-secondary);
+          text-align: center;
+          margin-bottom: var(--space-32);
+        }
+        
+        .slide-content {
+          max-width: 1000px;
+          margin: 0 auto;
+          width: 100%;
+        }
+        
+        .slide-content h2 {
+          font-size: var(--font-size-3xl);
+          color: var(--color-primary);
+          margin-bottom: var(--space-32);
+          border-bottom: 2px solid var(--color-primary);
+          padding-bottom: var(--space-16);
+        }
+        
+        .slide-content h3 {
+          font-size: var(--font-size-xl);
+          color: var(--color-accent);
+          margin-bottom: var(--space-24);
+        }
+        
+        .bullet-points {
+          list-style: none;
+        }
+        
+        .bullet-points li {
+          font-size: var(--font-size-md);
+          line-height: var(--line-height-normal);
+          margin-bottom: var(--space-16);
+          padding-left: var(--space-32);
+          position: relative;
+        }
+        
+        .bullet-points li:before {
+          content: "▶";
+          color: var(--color-primary);
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+        
+        .bullet-points li strong {
+          color: var(--color-primary);
+        }
+        
+        .two-column {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: var(--space-48);
+          align-items: start;
+        }
+        
+        .timeline-item {
+          background: rgba(212, 175, 55, 0.1);
+          border-left: 4px solid var(--color-primary);
+          padding: var(--space-16) var(--space-24);
+          margin-bottom: var(--space-16);
+          border-radius: 0 var(--radius-base) var(--radius-base) 0;
+        }
+        
+        .timeline-year {
+          font-size: var(--font-size-lg);
+          font-weight: var(--font-weight-bold);
+          color: var(--color-primary);
+          margin-bottom: var(--space-8);
+        }
+        
+        .timeline-event {
+          font-size: var(--font-size-base);
+          color: var(--color-text);
+        }
+        
+        .org-chart {
+          text-align: center;
+          font-size: var(--font-size-md);
+          line-height: 2;
+        }
+        
+        .org-level {
+          padding: 2px;
+          background: rgba(212, 175, 55, 0.1);
+          border-radius: var(--radius-base);
+          border: 1px solid var(--color-primary);
+        }
+        
+        .navigation {
+          background: var(--bethesda-gray);
+          padding: var(--space-16) var(--space-32);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-top: 1px solid var(--color-primary);
+        }
+        
+        .nav-button {
+          background: var(--color-primary);
+          color: var(--color-background);
+          border: none;
+          padding: var(--space-16) var(--space-32);
+          border-radius: var(--radius-base);
+          font-size: var(--font-size-base);
+          font-weight: var(--font-weight-medium);
+          cursor: pointer;
+          transition: all var(--duration-normal) var(--ease-standard);
+        }
+        
+        .nav-button:hover {
+          background: #b8941f;
+          transform: translateY(-2px);
+        }
+        
+        .nav-button:disabled {
+          background: var(--color-accent);
+          cursor: not-allowed;
+          transform: none;
+        }
+        
+        .section-indicator {
+          display: flex;
+          gap: var(--space-16);
+          align-items: center;
+        }
+        
+        .section-dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: var(--color-accent);
+          transition: all var(--duration-normal) var(--ease-standard);
+        }
+        
+        .section-dot.active {
+          background: var(--color-primary);
+          transform: scale(1.3);
+        }
+        
+        .section-label {
+          font-size: var(--font-size-sm);
+          color: var(--color-text-secondary);
+        }
+        
+        /* Title slide specific styles */
+        .title-slide {
+          text-align: center;
+          justify-content: center;
+        }
+        
+        .main-title {
+          font-size: 72px;
+          font-weight: var(--font-weight-bold);
+          color: var(--color-primary);
+          margin-bottom: var(--space-32);
+          text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+          letter-spacing: -2px;
+        }
+        
+        .main-subtitle {
+          font-size: var(--font-size-3xl);
+          color: var(--color-text-secondary);
+          margin-bottom: var(--space-64);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+          .slide {
+            padding: var(--space-32);
+          }
+          
+          .main-title {
+            font-size: 56px;
+          }
+          
+          .slide-title {
+            font-size: var(--font-size-3xl);
+          }
+          
+          .two-column {
+            grid-template-columns: 1fr;
+            gap: var(--space-24);
+          }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <header class="presentation-header">
+            <div class="presentation-title">BETHESDA: A Gaming Industry Pioneer</div>
+            <div class="slide-counter">
+                <span id="current-slide">1</span> / <span id="total-slides">15</span>
+            </div>
+        </header>
+
+        <div class="slide-container">
+            <!-- Slide 1: Title Slide -->
+            <div class="slide active title-slide" data-slide="1">
+                <div class="slide-content">
+                    <h1 class="main-title">BETHESDA</h1>
+                    <h2 class="main-subtitle">A Gaming Industry Pioneer</h2>
+                    <h3 class="slide-subtitle">Company Presentation</h3>
+                </div>
+            </div>
+
+            <!-- Slide 2: Company Overview -->
+            <div class="slide" data-slide="2">
+                <div class="slide-content">
+                    <h1 class="slide-title">Company Overview</h1>
+                    <ul class="bullet-points">
+                        <li><strong>Company Name:</strong> Bethesda Softworks LLC / Bethesda Game Studios</li>
+                        <li><strong>Founded:</strong> June 28, 1986</li>
+                        <li><strong>Founder:</strong> Christopher Weaver</li>
+                        <li><strong>Origin:</strong> Bethesda, Maryland (moved to Rockville, Maryland in 1990)</li>
+                        <li><strong>Current Status:</strong> Subsidiary of Microsoft Gaming</li>
+                        <li><strong>Acquisition:</strong> March 2021 for $7.5 billion</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 3: The Beginning -->
+            <div class="slide" data-slide="3">
+                <div class="slide-content">
+                    <h1 class="slide-title">The Beginning (1986-1990s)</h1>
+                    <ul class="bullet-points">
+                        <li><strong>Founded</strong> as division of Media Technology Limited</li>
+                        <li><strong>Initial focus:</strong> Physics-based sports games (Gridiron!)</li>
+                        <li><strong>Early games:</strong> Wayne Gretzky Hockey series, Terminator games</li>
+                        <li><strong>Strategic transition:</strong> From sports to RPGs</li>
+                        <li><strong>Headquarters move:</strong> Relocated to Rockville, Maryland in 1990</li>
+                        <li><strong>Innovation:</strong> Pioneered physics-based gaming technology</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 4: Major Milestones Timeline -->
+            <div class="slide" data-slide="4">
+                <div class="slide-content">
+                    <h1 class="slide-title">Major Milestones Timeline</h1>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1994</div>
+                        <div class="timeline-event">The Elder Scrolls: Arena launched - First RPG success</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1999</div>
+                        <div class="timeline-event">ZeniMax Media founded as parent company</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2002</div>
+                        <div class="timeline-event">Morrowind released - Critical and commercial breakthrough</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2008</div>
+                        <div class="timeline-event">Acquired Fallout franchise, released Fallout 3</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2011</div>
+                        <div class="timeline-event">Skyrim launched - Massive global phenomenon</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2021</div>
+                        <div class="timeline-event">Microsoft acquisition finalized ($7.5-8.1 billion)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Company Evolution -->
+            <div class="slide" data-slide="5">
+                <div class="slide-content">
+                    <h1 class="slide-title">Company Evolution</h1>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1986-1994</div>
+                        <div class="timeline-event">Sports games era - Physics-based innovations</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1994-2001</div>
+                        <div class="timeline-event">RPG pioneer with The Elder Scrolls franchise</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2001-2020</div>
+                        <div class="timeline-event">Development studio expansion &amp; franchise growth</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2021-Present</div>
+                        <div class="timeline-event">Part of Microsoft Gaming division</div>
+                    </div>
+                    <ul class="bullet-points" style="margin-top: 32px;">
+                        <li><strong>Creative independence:</strong> Maintained under Microsoft ownership</li>
+                        <li><strong>Strategic focus:</strong> Immersive open-world RPG experiences</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 6: Founders & Early Leadership -->
+            <div class="slide" data-slide="6">
+                <div class="slide-content">
+                    <h1 class="slide-title">Founders &amp; Early Leadership</h1>
+                    <div class="two-column">
+                        <div>
+                            <h3>Christopher Weaver (Founder, 1986)</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Background:</strong> Engineer from MIT</li>
+                                <li><strong>Innovation:</strong> Created Media Technology Limited</li>
+                                <li><strong>Pioneer:</strong> Physics-based gaming technology</li>
+                                <li><strong>Role:</strong> Served as CTO until 2002</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Robert A. Altman (Co-founder ZeniMax, 1999-2021)</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Background:</strong> Lawyer and business executive</li>
+                                <li><strong>Leadership:</strong> CEO and Chairman of ZeniMax Media</li>
+                                <li><strong>Partnership:</strong> Collaborated with Weaver to establish parent company</li>
+                                <li><strong>Legacy:</strong> Led company until his death in February 2021</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Current Leadership - Todd Howard -->
+            <div class="slide" data-slide="7">
+                <div class="slide-content">
+                    <h1 class="slide-title">Current Leadership - Todd Howard</h1>
+                    <h2>Game Director &amp; Executive Producer</h2>
+                    <ul class="bullet-points">
+                        <li><strong>Joined Bethesda:</strong> 1994</li>
+                        <li><strong>Career progression:</strong> Started as Producer</li>
+                        <li><strong>First game:</strong> The Terminator: Future Shock (1995)</li>
+                        <li><strong>Project Leader:</strong> Redguard (1998)</li>
+                        <li><strong>Major titles:</strong> Morrowind, Oblivion, Skyrim, Fallout 3, Fallout 4, Starfield</li>
+                        <li><strong>Recognition:</strong> Multiple Game of the Year awards</li>
+                        <li><strong>Industry honors:</strong> GDC Lifetime Achievement Award, AIAS Hall of Fame (2017)</li>
+                        <li><strong>Public role:</strong> Known as the face of Bethesda Game Studios</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 8: Other Key Leaders -->
+            <div class="slide" data-slide="8">
+                <div class="slide-content">
+                    <h1 class="slide-title">Other Key Leaders</h1>
+                    <div class="two-column">
+                        <div>
+                            <h3>Pete Hines (Retired 2023)</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Joined:</strong> 1999</li>
+                                <li><strong>Role:</strong> SVP Global Marketing &amp; Communications (1999-2022)</li>
+                                <li><strong>Final role:</strong> Head of Publishing (2022-2023)</li>
+                                <li><strong>Legacy:</strong> Public face of Bethesda for 24 years</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Current Structure</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Leadership:</strong> Multiple studio directors across locations</li>
+                                <li><strong>Studios:</strong> Rockville, Austin, Dallas, and Montreal</li>
+                                <li><strong>Workforce:</strong> Recently unionized (2024)</li>
+                                <li><strong>Organization:</strong> Wall-to-wall union structure</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Company Structure -->
+            <div class="slide" data-slide="9">
+                <div class="slide-content">
+                    <h1 class="slide-title">Company Structure</h1>
+                    <div class="two-column">
+                        <div>
+                            <h3>Corporate Hierarchy</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Parent Company:</strong> Microsoft Gaming (2021-present)</li>
+                                <li><strong>Previously:</strong> ZeniMax Media (1999-2021)</li>
+                                <li><strong>Publisher:</strong> Bethesda Softworks</li>
+                                <li><strong>Developer:</strong> Bethesda Game Studios</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Sister Studios under ZeniMax</h3>
+                            <ul class="bullet-points">
+                                <li><strong>id Software</strong> (DOOM franchise)</li>
+                                <li><strong>Arkane Studios</strong> (Dishonored, Prey)</li>
+                                <li><strong>MachineGames</strong> (Wolfenstein)</li>
+                                <li><strong>Tango Gameworks</strong></li>
+                                <li><strong>ZeniMax Online Studios</strong> (Elder Scrolls Online)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Organizational Hierarchy -->
+            <div class="slide" data-slide="10">
+                <div class="slide-content">
+                    <h1 class="slide-title">Organizational Hierarchy</h1>
+                    <div class="org-chart">
+                        <div class="org-level">
+                            <strong>Microsoft Gaming</strong><br>
+                            (Parent Company)
+                        </div>
+                        <div style="text-align: center; font-size: 24px; color: var(--color-primary);">↓</div>
+                        <div class="org-level">
+                            <strong>ZeniMax Media</strong><br>
+                            (Holding Company)
+                        </div>
+                        <div style="text-align: center; font-size: 24px; color: var(--color-primary);">↓</div>
+                        <div class="org-level">
+                            <strong>Bethesda Softworks</strong><br>
+                            (Publisher)
+                        </div>
+                        <div style="text-align: center; font-size: 24px; color: var(--color-primary);">↓</div>
+                        <div class="org-level">
+                            <strong>Bethesda Game Studios</strong><br>
+                            (Developer)
+                        </div>
+                        <div style="text-align: center; font-size: 24px; color: var(--color-primary);">↓</div>
+                        <div class="org-level">
+                            <strong>Four Development Studios</strong><br>
+                            (Rockville, Montreal, Austin, Dallas)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Headquarters & Facilities -->
+            <div class="slide" data-slide="11">
+                <div class="slide-content">
+                    <h1 class="slide-title">Headquarters &amp; Facilities</h1>
+                    <ul class="bullet-points">
+                        <li><strong>Main Headquarters:</strong> 1370 Piccard Drive, Rockville, Maryland 20850</li>
+                        <li><strong>Location:</strong> 20 miles north of Washington, D.C.</li>
+                        <li><strong>Global presence:</strong> Offices in North America, Europe, Australia, Asia</li>
+                        <li><strong>Facilities include:</strong>
+                            <ul style="margin-left: 32px; margin-top: 8px;">
+                                <li>Development studios</li>
+                                <li>Motion capture facilities</li>
+                                <li>Quality assurance testing labs</li>
+                                <li>Publishing operations</li>
+                            </ul>
+                        </li>
+                        <li><strong>Working Environment:</strong> Gamer-friendly culture with collaborative spaces</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 12: Personnel & Work Culture -->
+            <div class="slide" data-slide="12">
+                <div class="slide-content">
+                    <h1 class="slide-title">Personnel &amp; Work Culture</h1>
+                    <div class="two-column">
+                        <div>
+                            <h3>Employee Statistics</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Total employees:</strong> ~1,300-1,500 (ZeniMax)</li>
+                                <li><strong>BGS developers:</strong> ~450-500</li>
+                                <li><strong>Union status:</strong> Unionized (July 2024)</li>
+                                <li><strong>Structure:</strong> "Wall-to-wall" union (first at Microsoft)</li>
+                            </ul>
+
+                            <h3>Departments</h3>
+                            <ul class="bullet-points">
+                                <li>Game Directors &amp; Designers</li>
+                                <li>Programmers &amp; Engineers</li>
+                                <li>Artists &amp; Animators</li>
+                                <li>Quality Assurance</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Work Culture</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Community:</strong> Passionate gaming environment</li>
+                                <li><strong>Freedom:</strong> Creative freedom emphasized</li>
+                                <li><strong>Collaboration:</strong> Team-oriented approach</li>
+                                <li><strong>Innovation:</strong> Gamer-friendly workplace policies</li>
+                            </ul>
+
+                            <h3>Additional Roles</h3>
+                            <ul class="bullet-points">
+                                <li>Sound Engineers &amp; Composers</li>
+                                <li>Producers &amp; Project Managers</li>
+                                <li>Marketing &amp; Publishing teams</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13: Major Franchises & Games -->
+            <div class="slide" data-slide="13">
+                <div class="slide-content">
+                    <h1 class="slide-title">Major Franchises &amp; Games</h1>
+                    <div class="two-column">
+                        <div>
+                            <h3>The Elder Scrolls Series</h3>
+                            <ul class="bullet-points">
+                                <li>Arena (1994), Daggerfall (1996)</li>
+                                <li>Morrowind (2002), Oblivion (2006)</li>
+                                <li>Skyrim (2011) - Cultural phenomenon</li>
+                                <li>Elder Scrolls Online (ZeniMax Online)</li>
+                                <li>Elder Scrolls VI (in development)</li>
+                            </ul>
+
+                            <h3>Fallout Series</h3>
+                            <ul class="bullet-points">
+                                <li>Fallout 3 (2008) - Franchise acquired</li>
+                                <li>Fallout 4 (2015)</li>
+                                <li>Fallout 76 (2018) - Multiplayer</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>New IP &amp; Other Franchises</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Starfield (2023):</strong> First new IP in 25 years</li>
+                                <li><strong>Sister franchises:</strong> DOOM, Wolfenstein</li>
+                                <li><strong>Additional titles:</strong> Dishonored, Prey, Quake, Rage</li>
+                            </ul>
+
+                            <h3>Sales Performance</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Total sales:</strong> Over 100 million copies</li>
+                                <li><strong>Market impact:</strong> Industry-defining RPGs</li>
+                                <li><strong>Cultural influence:</strong> Massive modding communities</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 14: Current Challenges -->
+            <div class="slide" data-slide="14">
+                <div class="slide-content">
+                    <h1 class="slide-title">Current Challenges</h1>
+                    <div class="two-column">
+                        <div>
+                            <h3>Post-Launch Reception Issues</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Starfield:</strong> Received mixed feedback (2023-2024)</li>
+                                <li><strong>DLC performance:</strong> Shattered Space underperformed</li>
+                                <li><strong>Community concerns:</strong> Paid mods controversy</li>
+                            </ul>
+
+                            <h3>Industry Pressures</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Development time:</strong> Long cycles (5-7+ years per game)</li>
+                                <li><strong>Industry changes:</strong> Studio closures and layoffs in 2024</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Technical &amp; Strategic Challenges</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Technology:</strong> Aging Creation Engine</li>
+                                <li><strong>Competition:</strong> Other open-world RPGs advancing</li>
+                                <li><strong>Standards:</strong> Meeting modern gaming expectations</li>
+                                <li><strong>Management:</strong> Coordinating multiple studios efficiently</li>
+                                <li><strong>Balance:</strong> Creative vision vs. corporate expectations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 15: Future Goals & Vision -->
+            <div class="slide" data-slide="15">
+                <div class="slide-content">
+                    <h1 class="slide-title">Future Goals &amp; Vision</h1>
+                    <div class="two-column">
+                        <div>
+                            <h3>Upcoming Projects</h3>
+                            <ul class="bullet-points">
+                                <li><strong>The Elder Scrolls VI:</strong> Projected 2026-2028</li>
+                                <li><strong>Starfield:</strong> Continued support and DLC expansion</li>
+                                <li><strong>Fallout 5:</strong> Early planning stages</li>
+                                <li><strong>Indiana Jones:</strong> Great Circle (released 2024)</li>
+                            </ul>
+
+                            <h3>Long-Term Vision</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Support model:</strong> 10-year game lifecycles</li>
+                                <li><strong>Content strategy:</strong> Longer post-launch cycles</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Company Objectives</h3>
+                            <ul class="bullet-points">
+                                <li><strong>Core focus:</strong> Create immersive open-world RPGs</li>
+                                <li><strong>Platform expansion:</strong> Reach new gaming platforms</li>
+                                <li><strong>Community support:</strong> Thriving modding ecosystems</li>
+                                <li><strong>Quality delivery:</strong> High-standard AAA experiences</li>
+                                <li><strong>Independence:</strong> Maintain creative freedom under Microsoft</li>
+                                <li><strong>Innovation:</strong> Games as evolving live services</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navigation">
+            <button class="nav-button" id="prev-btn" onclick="previousSlide()">Previous</button>
+            <div class="section-indicator">
+                <div class="section-dot active" data-section="1"></div>
+                <span class="section-label">Foundation</span>
+                <div class="section-dot" data-section="2"></div>
+                <span class="section-label">Leadership</span>
+                <div class="section-dot" data-section="3"></div>
+                <span class="section-label">Future</span>
+            </div>
+            <button class="nav-button" id="next-btn" onclick="nextSlide()">Next</button>
+        </nav>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 15;
+        
+        function updateSlideDisplay() {
+            // Hide all slides
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show current slide
+            document.querySelector(`[data-slide="${currentSlide}"]`).classList.add('active');
+            
+            // Update counter
+            document.getElementById('current-slide').textContent = currentSlide;
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = currentSlide === 1;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+            
+            // Update section indicators
+            document.querySelectorAll('.section-dot').forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            let currentSection;
+            if (currentSlide <= 5) currentSection = 1;
+            else if (currentSlide <= 10) currentSection = 2;
+            else currentSection = 3;
+            
+            document.querySelector(`[data-section="${currentSection}"]`).classList.add('active');
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlideDisplay();
+            }
+        }
+        
+        function previousSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlideDisplay();
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowRight':
+                case ' ':
+                    e.preventDefault();
+                    nextSlide();
+                    break;
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    previousSlide();
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    currentSlide = 1;
+                    updateSlideDisplay();
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    currentSlide = totalSlides;
+                    updateSlideDisplay();
+                    break;
+            }
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('total-slides').textContent = totalSlides;
+            updateSlideDisplay();
+        });
+    </script>
+</body>
+</html>
